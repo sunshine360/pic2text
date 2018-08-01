@@ -2,7 +2,9 @@
 from PIL import Image
 import pytesseract
 
-text=pytesseract.image_to_string(Image.open('D:/pic/20180725sp.png'),lang='chi_sim')
+text=pytesseract.image_to_string(Image.open('D:/pic/20180726sz1.png'),lang='chi_sim')
+#text_1=pytesseract.image_to_string(Image.open('D:/pic/20180726sz2.png'),lang='chi_sim')
+#text=text+text_1
 print(text)
 
 #写源数据
@@ -48,7 +50,8 @@ chinese={'钥':'铜','磐':'器','酶':'酿','锦':'镍',
          '棘':'榈','敬':'数','镇':'镍','锋':'锌',
          '樵':'橡','褥':'棉','燧':'煤','棍':'榈',
          '煌':'煤','楹':'榈','锏':'铜','锆':'锌',
-         '炼':'炭'}
+         '炼':'炭','泉':'油','美':'类','泉':'油',
+         '艄':'舶','燥':'焦','晶':'品'}
 Date_sp={
       '螺纹指数':[],'原油指数':[],'沪镍指数':[],
       '沪锌指数':[],'焦炭指数':[],'苹果指数':[],
@@ -117,7 +120,7 @@ while z<=len(text_end)-1:
 print(text_end)
 #写入文件
 
-f = open('D:/text/20180725sp.csv','w')
+f = open('D:/text/20180726sz2.csv','w')
 i=0
 while i<=len(text_end)-1:
     f.write(text_end[i])

@@ -1,8 +1,12 @@
 #!wing
-#!version=5.0
+#!version=6.0
 ##################################################################
 # Wing IDE project file                                          #
 ##################################################################
 [project attributes]
-proj.file-list = [loc('charpter.py')]
+proj.file-list = [loc('charpter.py'),
+                  loc('pic2text_v1.0.py'),
+                  loc('pic2word.py'),
+                  loc('pic2wordtest.py'),
+                  loc('picword_v0.1.py')]
 proj.file-type = 'shared'

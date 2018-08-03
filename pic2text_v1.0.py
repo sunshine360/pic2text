@@ -4,8 +4,10 @@ from PIL import Image
 import pytesseract
 import time
 import sys
+import datetime
 
-
+start_time = datetime.datetime.now()
+#start_time=time.strftime("%H:%M:%S", time.localtime())
 def load_dict_from_file(filepath):
     _dict = {}
     try:
@@ -79,37 +81,38 @@ def chinese_combine(self):
         z+=1
     return self
 
-def data(list):
-    if(input_file.find('sz')):
+def data(lists):
+    Data={}
+    if(input_file.find('sz')!=-1):
         Data={0: ['序号', '合约', '最新', '涨跌', 
                   '成交量', '成交额', '资金流向',
                   '沉淀资金', '总市值', '量比'] }
-    else:
+    if(input_file.find('sp')!=-1):
         Data={0: ['序号', '合约', '最新', '涨跌',
                   '持仓量','成交量', '成交额', '沉淀资金', 
                   '资金流向', '投机度', '昨结算'] }
     i=0
     top=1
-    Width=30
+    Width=100
     buffer=[]
-    while i<=len(list)-1:
-        if (list[i].find('\n')!=-1):
+    while i<=len(lists)-1:
+        if (lists[i].find('\n')!=-1):
             num=1
             while num<=Width:
-                if((i+num) == len(list)-1):
-                    #buffer.append(list[i+num])
+                if((i+num) == len(lists)-1):
+                    #buffer.append(lists[i+num])
                     Data[top]=buffer
                     i=i+num-1
                     break
-                if (list[i+num].find('\n')!=-1):
+                if (lists[i+num].find('\n')!=-1):
                     #print(buffer)
-                    #buffer.append(list[i+num])
+                    #buffer.append(lists[i+num])
                     Data[top]=buffer.copy()
                     buffer.clear()
                     top+=1
                     i=i+num-1
                     break
-                buffer.append(list[i+num])
+                buffer.append(lists[i+num])
                 num+=1
         i+=1    
     return Data
@@ -145,6 +148,7 @@ chinese=load_dict_from_file('D:/projects/pic2text/errortext.txt')
 
 #图片识别
 result=pytesseract.image_to_string(Image.open(input_file),lang='chi_sim')
+#print(result)
 #ret_table=result.splitlines()
 #print(ret_table)
 #i = 0
@@ -157,11 +161,8 @@ text_result=clean_unit(result)
 text_result=chinese_combine(text_result)
 text_result=data(text_result)
 #print(len(text_result))
-#print(text_result)
 write_data(text_result)
-#print(text_result)
-
-
-        
-    
+#end_time=time.strftime("%H:%M:%S", time.localtime())
+end_time = datetime.datetime.now()
+print((end_time-start_time).seconds)
 
